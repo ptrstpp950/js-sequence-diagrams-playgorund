@@ -83,7 +83,7 @@
  ******************/
 
 	Raphael.fn.line = function(x1, y1, x2, y2) {
-		assert(_.all([x1,x2,y1,y2], _.isFinite), "x1,x2,y1,y2 must be numeric");
+	    assert(_.all([x1, x2, y1, y2], _.isFinite), "x1,x2,y1,y2 must be numeric");
 		return this.path("M{0},{1} L{2},{3}", x1, y1, x2, y2);
 	};
 
@@ -396,7 +396,10 @@
 
 		draw_actors : function(offsetY) {
 			var y = offsetY;
-			_.each(this.diagram.actors, function(a) {
+			_.each(this.diagram.actors, function (a) {
+			    var paper = this._paper;
+
+			    paper.setStart();
 				// Top box
 				this.draw_actor(a, y, this._actors_height);
 
@@ -409,6 +412,11 @@
 					aX, y + this._actors_height - ACTOR_MARGIN,
 					aX, y + this._actors_height + ACTOR_MARGIN + this._signals_height);
 				line.attr(LINE);
+				var st = paper.setFinish();
+				st.class = "xxxx";
+				st.forEach(function (e) {
+				    e.node.setAttribute("class", "track");
+				});
 			}, this);
 		},
 
@@ -419,20 +427,33 @@
 		},
 
 		draw_signals : function (offsetY) {
-			var y = offsetY;
-			_.each(this.diagram.signals, function(s) {
-				if (s.type == "Signal") {
+		    var y = offsetY;
+		    var isFirstNote = true;
+		    var index = 0;
+		    var prev_height = 0;
+			_.each(this.diagram.signals, function (s) {
+			    
+			    
+			    index++;
+			    if (s.type == "Signal") {
+			        y += prev_height;
 					if (s.isSelf()) {
 						this.draw_self_signal(s, y);
 					} else {
 						this.draw_signal(s, y);
 					}
+			        isFirstNote = false;
+			    } else if (s.type == "Note") {
+			        if (!isFirstNote)
+			            y += prev_height;
+			        isFirstNote = true;
+				    this.draw_note(s, y);
+				    
+				     
+			    }
+			    prev_height = s.height;
 
-				} else if (s.type == "Note") {
-					this.draw_note(s, y);
-				}
 
-				y += s.height;
 			}, this);
 		},
 

@@ -6,7 +6,7 @@
     <title></title>
 </head>
 <body>
-    <script type="text/javascript" src="js/raphael-min.js"></script>
+    <script type="text/javascript" src="js/raphael.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
     
     <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
@@ -16,9 +16,18 @@
     <script type="text/javascript" src="js/daniel_700.font.js"></script>
     <script type="text/javascript" src="js/sequence-diagram.js"></script>
 
-<div class="diagram">A->B: Message
-B->A: xxxxx
-Note left of A: Note to the\n left of A</div>
+    <div class="diagram">
+        Load Balancer->B: Message
+        Note left of A: Note to the\n left of A
+        Note left of B: Note to the\n left of B
+        Note left of C: Note to the\n left of B
+        
+        B->Load Balancer: xxxxx
+        B->C: ssss
+        Note left of A: Note to the\n left of A
+        Note left of B: Note to the\n left of B
+        Note left of C: Note to the\n left of B
+    </div>
     <script>
         $(".diagram").sequenceDiagram({theme: 'hand'});
     </script>

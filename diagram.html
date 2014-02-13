@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript" src="js/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/copyright.js"></script>
+    <script type="text/javascript" src="js/diagram-grammar.js"></script>
+    <script type="text/javascript" src="js/jquery-plugin.js"></script>
+    <script type="text/javascript" src="js/daniel_700.font.js"></script>
+    <script type="text/javascript" src="js/sequence-diagram.js"></script>
+
+<div class="diagram">A->B: Message
+B->A: xxxxx
+Note left of A: Note to the\n left of A</div>
+    <script>
+        $(".diagram").sequenceDiagram({theme: 'hand'});
+    </script>
+</body>
+</html>

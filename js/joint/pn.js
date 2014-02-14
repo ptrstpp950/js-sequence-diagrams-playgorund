@@ -1,4 +1,4 @@
-var doFlowAnim = function() {
+var nmbNetwork = function() {
     var graph = new joint.dia.Graph;
 
     var paper = new joint.dia.Paper({
@@ -187,6 +187,7 @@ var doFlowAnim = function() {
 
     var indexPath = [];
     var currentColor = get_random_color();
+    var token;
     function doAnimation(nowInPart, prevIndex, front) {
         var sec = 1;
         var currentLinks;
@@ -215,7 +216,7 @@ var doFlowAnim = function() {
         else {
             r = 5 + nowInPart;
         }*/
-        var token = V('circle', { r: r, fill: currentColor });
+        token = V('circle', { r: r, fill: currentColor });
         $(paper.viewport).append(token.node);
         token.animateAlongPath({ dur: sec + 's', repeatCount: 1 },
             path
@@ -248,6 +249,12 @@ var doFlowAnim = function() {
             //$(paper.viewport).append(token.node);
         }, (sec) * 1000);
     }
-
-    doAnimation(0, 0, true);
-}();
+    this.start = function(){
+        doAnimation(0, 0, true);
+    }
+    this.stop = function(){
+        token.remove();
+    }
+    
+    return this;
+};

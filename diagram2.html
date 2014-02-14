@@ -9,6 +9,7 @@
 <body>
     <h1>Petri Nets</h1>
     <div id="paper"></div>
+    <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/joint/smil.user.js"></script>
     <script src="js/joint/joint.js"></script>
     <script src="js/joint/joint.shapes.pn.js"></script>
@@ -16,5 +17,11 @@
     <script src="js/joint/joint.shapes.uml.js"></script>
     <script src="js/joint/joint.shapes.erd.js"></script>
     <script src="js/joint/pn.js"></script>
+    <script>
+        $(function() {
+            var xx = new nmbNetwork();
+            xx.start();
+        });
+    </script>
 </body>
 </html>
